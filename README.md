@@ -1,16 +1,17 @@
 # graphGenTypeorm
+
 Generate TypeORM Entities and Query/Mutation/Field Resolvers for use with graphql.
 
 # Important
+
 Library requires:
-+ [TypeORM](https://github.com/typeorm/typeorm)
-+ [GraphQL Tools](https://github.com/apollographql/graphql-tools)
-+ [GraphSchemaToJSON](https://github.com/jjwtay/graphSchemaToJson)
-+ [GraphQL Import](https://github.com/prismagraphql/graphql-import) Optional
 
+- [TypeORM](https://github.com/typeorm/typeorm)
+- [GraphQL Tools](https://github.com/apollographql/graphql-tools)
+- [GraphSchemaToJSON](https://github.com/jjwtay/graphSchemaToJson)
+- [GraphQL Import](https://github.com/prismagraphql/graphql-import) Optional
 
-
-*Example graphql file usage*
+_Example graphql file usage_
 
     # import Entity, PrimaryGeneratedColumn, ManyToMany, ManyToOne, OneToMany, EntityEnum, Column from 'graphgentypeorm/src/typeorm.graphql'
     # optional graphql-import of all typeorm directives
@@ -36,7 +37,7 @@ Library requires:
         books: @OneToMany(inverseSide: "publisher")
     }
 
-*Create graphql Query and Mutation graphql files*
+_Create graphql Query and Mutation graphql files_
 
     import { schemaToJS } from 'graphschematojson'
     import { queryTemplate, mutationTemplate } from 'graphgentypeorm'
@@ -54,7 +55,7 @@ Library requires:
     writeFileSync(`./generated/query.graphql`, queryTemplate(jsSchema))
     writeFileSync(`./generated/mutation.graphql`, mutationTemplate(jsSchema))
 
-*Create TypeORM instance with generated Entities. Example using [graphql-yoga](https://github.com/prismagraphql/graphql-yoga)*
+_Create TypeORM instance with generated Entities. Example using [graphql-yoga](https://github.com/prismagraphql/graphql-yoga)_
 
     import { createConnection, EntitySchema } from 'typeorm
     import { getQueryResolvers, getMutationResolvers, getRepositories,  getEntitySchemas } from 'graphgentypeorm'
@@ -95,12 +96,11 @@ Library requires:
         server.start(() => console.log('Server is running on localhost:4000'))
     })
 
-
 # TODO (tons)
 
-+ Improve input get all query to support filter/sort/limit/...
-+ Add directives for type checking (email, url, regex, ...)
-+ unit-testing
-+ clean up messy code (most of it)
-+ make export resolvers template for migration away when user wants.
-+ Add protected directives for fields that should be removed from input generation and have separate input generation(not sure on this)
+- Improve `input` get all query to support filter/sort/limit/...
+- Add directives for type checking (`email`, `url`, `regex`, ...)
+- unit-testing (jest)
+- make export resolvers template for migration away when user wants.
+- Add protected directives for fields that should be removed from input generation and have separate input generation (?)
+- clean up messy code (WIP)
